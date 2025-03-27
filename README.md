@@ -9,18 +9,22 @@ S3バケットに配置されたJSONファイルを定期的に検出し、YAML�
 - CloudWatch Logs: タスクの実行ログを保存
 
 ```mermaid
-graph LR
+flowchart LR
     S3[S3 Bucket] -->|1. JSONファイル検出| ECS[ECS Fargate Task]
     Scheduler[EventBridge Scheduler] -->|定期実行| ECS
     ECS -->|2. YAML変換| ECS
     ECS -->|3. PUTリクエスト| API[API Endpoint]
     ECS -->|実行ログ| Logs[CloudWatch Logs]
 
-    style S3 fill:#FF9900
-    style ECS fill:#FF9900
-    style Scheduler fill:#FF4F8B
-    style API fill:#7AA116
-    style Logs fill:#3F8624
+    classDef aws fill:#FF9900
+    classDef scheduler fill:#FF4F8B
+    classDef api fill:#7AA116
+    classDef logs fill:#3F8624
+
+    class S3,ECS aws
+    class Scheduler scheduler
+    class API api
+    class Logs logs
 ```
 
 ## 作成されるAWSリソース
