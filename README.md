@@ -10,10 +10,10 @@ S3バケットに配置されたJSONファイルを定期的に検出し、YAML�
 
 ```mermaid
 flowchart LR
-    S3[S3 バケット] -->|1. JSONファイル検出| ECS[ECS Fargate タスク]
+    S3[S3 バケット] -->|1-JSONファイル検出| ECS[ECS Fargate タスク]
     Scheduler[EventBridge スケジューラー] -->|定期実行| ECS
-    ECS -->|2. YAML変換| ECS
-    ECS -->|3. PUTリクエスト| API[APIエンドポイント]
+    ECS -->|2-YAML変換| ECS
+    ECS -->|3-PUTリクエスト| API[APIエンドポイント]
     ECS -->|実行ログ| Logs[CloudWatch Logs]
 
     classDef aws fill:#FF9900
