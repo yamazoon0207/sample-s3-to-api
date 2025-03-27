@@ -10,14 +10,14 @@ S3バケットに配置されたJSONファイルを定期的に検出し、YAML�
 
 ```mermaid
 graph LR
-    S3[S3 Bucket] -->|1. JSONファイル検出| ECS Fargate Task
-    EventBridge Scheduler -->|定期実行| Task
-    Task -->|2. YAML変換| Task
-    Task -->|3. PUTリクエスト| API[API Endpoint]
-    Task -->|実行ログ| Logs[CloudWatch Logs]
+    S3[S3 Bucket] -->|1. JSONファイル検出| ECS[ECS Fargate Task]
+    Scheduler[EventBridge Scheduler] -->|定期実行| ECS
+    ECS -->|2. YAML変換| ECS
+    ECS -->|3. PUTリクエスト| API[API Endpoint]
+    ECS -->|実行ログ| Logs[CloudWatch Logs]
 
     style S3 fill:#FF9900
-    style Task fill:#FF9900
+    style ECS fill:#FF9900
     style Scheduler fill:#FF4F8B
     style API fill:#7AA116
     style Logs fill:#3F8624
