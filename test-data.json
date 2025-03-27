@@ -1,0 +1,15 @@
+{
+  "name": "test-data",
+  "description": "Test JSON file for converter",
+  "items": [
+    {
+      "id": 1,
+      "value": "item1"
+    },
+    {
+      "id": 2,
+      "value": "item2"
+    }
+  ],
+  "timestamp": "2025-03-27T21:26:00+09:00"
+}
