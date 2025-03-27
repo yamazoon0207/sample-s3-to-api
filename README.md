@@ -4,9 +4,20 @@ S3バケットに配置されたJSONファイルを定期的に検出し、YAML�
 
 ## アーキテクチャ
 
-- ECS Fargate Task: JSONファイルの検出、変換、APIリクエストを実行
-- EventBridge Scheduler: 定期的なタスク実行をスケジュール
-- CloudWatch Logs: タスクの実行ログを保存
+```mermaid
+graph LR
+    S3[S3 Bucket] -->|1. JSONファイル検出| Task[ECS Fargate Task]
+    Scheduler[EventBridge Scheduler] -->|定期実行| Task
+    Task -->|2. YAML変換| Task
+    Task -->|3. PUTリクエスト| API[API Endpoint]
+    Task -->|実行ログ| Logs[CloudWatch Logs]
+
+    style S3 fill:#FF9900
+    style Task fill:#FF9900
+    style Scheduler fill:#FF4F8B
+    style API fill:#7AA116
+    style Logs fill:#3F8624
+```
 
 ## 作成されるAWSリソース
 
